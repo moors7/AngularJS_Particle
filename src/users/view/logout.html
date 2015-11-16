@@ -1,0 +1,25 @@
+<md-bottom-sheet class="md-list md-has-header" ng-controller="bottomSheetController as bsc">
+
+
+    <h4>BULLSHIT</h4>
+
+
+    <md-list>
+        <form>
+            <md-input-container flex>
+                <label>bla</label>
+                <input ng-model="bsc.mail" type="email">
+            </md-input-container>
+
+            <md-input-container flex>
+                <label>fucker</label>
+                <input ng-model="bsc.pass" type="password">
+            </md-input-container>
+
+
+            <md-button ng-click="bsc.LoginParticle()" class="md-raised md-primary" style="margin:0px; text-align: center">Log in</button>
+
+        </form>
+    </md-list>
+
+</md-bottom-sheet>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <title>Angular Material - Starter App</title>
+
+    <!--<base href="/">-->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/\animate.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/app.css"/>
+</head>
+
+<body ng-app="myApp" layout="row" layout-fill ng-controller="mainController as ul">
+
+
+
+    <!-- Sidebar menu -->
+    <!--<md-sidenav data-ng-show="loggedIn" layout="column" class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="($mdMedia('gt-md') && $state.current.name != 'devices') || ($mdMedia('gt-md') && menuLocked)" id="sideNav">-->
+
+    <md-sidenav ng-if="loggedIn" layout="column" class="site-sidenav md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" id="sideNav">
+
+        <md-toolbar class="md-whiteframe-z1">
+            <div class="md-toolbar-tools">
+                <md-button data-ng-show="!$mdMedia('gt-md')" class="md-icon-button"  ng-click="ul.toggleMenu('left')" aria-label="Toggle menu">
+                    <md-icon md-svg-icon="menu" ></md-icon>
+                </md-button>
+                <h1>menu</h1>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+
+        <md-content flex>
+            <md-list>
+
+                <md-list-item ui-sref-active="active">
+                    <md-button ng-click="ul.toggleMenu('left')" ui-sref="home">
+                        home
+                    </md-button>
+                </md-list-item>
+
+                <md-list-item ui-sref-active="active">
+                    <md-button ng-click="ul.toggleMenu('left')" ui-sref="settings">
+                        Settings
+                    </md-button>
+                </md-list-item>
+                <md-list-item ui-sref-active="active">
+                    <md-button ng-click="ul.toggleMenu('left')" ui-sref="devices">
+                        Devices
+                    </md-button>
+                </md-list-item>
+                <md-list-item ui-sref-active="active">
+                    <md-button ng-click="ul.toggleMenu('left')" ui-sref="login">
+                        Login
+                    </md-button>
+                </md-list-item>
+            </md-list>
+
+        </md-content>
+
+        <!--<md-button class="md-raised md-primary" id="loginButton" ng-click="bsc.loginHandler($event)" ng-controller="bottomSheetController as bsc">-->
+            <!--Log in-->
+        <!--</md-button>-->
+        <!--<md-button ng-show="false" class="md-raised md-primary" id="loginButton" ng-click="bsc.showLogin($event)" ng-controller="bottomSheetController as bsc">-->
+            <!--Log in-->
+        <!--</md-button>-->
+    </md-sidenav>
+
+
+    <!--ng-show="$state.current.name === 'devices' && loggedIn && $mdMedia('sm')"-->
+    <!--ng-hide="!loggedIn && $mdMedia('gt-sm') && menuLocked"-->
+    <!--ng-if="loggedIn && $state.current.name === 'devices'"-->
+
+    <md-content layout="column" layout-fill>
+
+        <md-toolbar class="md-whiteframe-z1">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"  ng-click="ul.toggleMenu('left')" data-ng-show="!$mdMedia('gt-md')  && loggedIn" aria-label="Toggle menu">
+                    <md-icon md-svg-icon="menu" ></md-icon>
+                </md-button>
+
+                <h1>{{$state.current.name}}</h1>
+                <span flex></span>
+
+                <md-button class="md-icon-button" ng-click="ul.toggleMenu('deviceMenu')"  ng-show="$state.current.name === 'devices' && loggedIn && (!$mdMedia('gt-sm') || (!deviceMenuLocked && $mdMedia('gt-sm')))" aria-label="Toggle menu">
+                    <md-icon md-svg-icon="menu" ></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+
+        <md-content id="mainContent" flex layout="column" style="overflow: hidden" ui-view>
+
+            Loading...
+
+        </md-content>
+
+
+    </md-content>
+
+
+    <!-- Device selection area -->
+    <md-sidenav ng-if="$state.current.name === 'devices' && loggedIn" class="md-sidenav-right site-sidenav md-sidenav-user md-whiteframe-z2" md-component-id="deviceMenu" md-is-locked-open="$mdMedia('gt-sm') && deviceMenuLocked"  layout="column" style="overflow: hidden" >
+
+        <md-toolbar class="md-whiteframe-z1">
+            <div class="md-toolbar-tools">
+                <h1>Devices</h1>
+                <span flex></span>
+                <md-button class="md-icon-button"  ng-click="ul.toggleList()" ng-disabled="!$mdMedia('gt-sm')" aria-label="Toggle menu">
+                    <md-icon class="material-icons" data-ng-show="deviceMenuLocked && $mdMedia('gt-sm')" >lock_outline</md-icon>
+                    <md-icon class="material-icons" data-ng-show="!deviceMenuLocked || !$mdMedia('gt-sm')">lock_open</md-icon>
+                </md-button>
+                <md-button class="md-icon-button"  ng-click="ul.toggleMenu('deviceMenu')" ng-disabled="deviceMenuLocked && $mdMedia('gt-sm')" aria-label="Toggle menu">
+                    <md-icon md-svg-icon="menu" ></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-content>
+
+
+            <md-list>
+                <md-list-item>
+                    <h4>Photons</h4>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ng-repeat="photon in ul.photons">
+                    {{photon.name}}
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+
+            <md-divider></md-divider>
+
+            <md-list>
+                <md-list-item>
+                    <h4>Cores</h4>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item ng-repeat="core in ul.cores">
+                    {{core.name}}
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+
+        </md-content>
+        <!--<md-content>-->
+            <!--<md-list>-->
+                <!--<md-list-item ng-repeat="it in ul.users">-->
+                    <!--<md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">-->
+                        <!--{{it.name}}-->
+
+                    <!--</md-button>-->
+                <!--</md-list-item>-->
+                <!--<md-list-item ng-repeat="it in ul.users">-->
+                    <!--<md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">-->
+                        <!--{{it.name}}-->
+
+                    <!--</md-button>-->
+                <!--</md-list-item>-->
+                <!--<md-list-item ng-repeat="it in ul.users">-->
+                    <!--<md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">-->
+                        <!--{{it.name}}-->
+
+                    <!--</md-button>-->
+                <!--</md-list-item>-->
+            <!--</md-list>-->
+        <!--</md-content>-->
+
+        <md-button class="md-accent md-fab md-fab-bottom-right"><span style="font-size: 30px;">+</span> </md-button>
+
+    </md-sidenav>
+
+
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="./bower_components/angular-animate/angular-animate.js"></script>
+<script src="./bower_components/angular-aria/angular-aria.js"></script>
+<script src="./bower_components/spark/dist/spark.min.js"></script>
+
+
+<script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
+
+<script src="./src/users/Users.js"></script>
+<script src="src/users/app.js"></script>
+<script src="./src/users/UserService.js"></script>
+<script src="./src/users/app.routes.js"></script>
+
+
+</body>
+</html>

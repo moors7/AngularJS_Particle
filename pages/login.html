@@ -1,0 +1,27 @@
+<div layout="row" layout-align="center">
+    <!--<div flex></div>-->
+    <div flex-sm="95" flex-md="60" flex-gt-md="40">
+
+        <h4>Please fill in your credentials to log in to the Particle Cloud.</h4>
+
+
+        <md-list>
+            <form>
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input ng-model="user.mail" type="email">
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Password</label>
+                    <input ng-model="user.pass" type="password">
+                </md-input-container>
+
+
+                <md-button ng-click="lgn.loginButton(user)" class="md-raised md-primary" style="margin:0px; text-align: center">Log in</md-button>
+
+            </form>
+        </md-list>
+    </div>
+    <!--<div flex></div>-->
+</div>
